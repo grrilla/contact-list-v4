@@ -6,7 +6,6 @@ class Contact < ActiveRecord::Base
   validates :name,
     presence: true
 
-
   # def to_s
   #   "#{id}: #{name} (#{email})"
   # end

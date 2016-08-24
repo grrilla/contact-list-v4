@@ -1,1 +1,82 @@
-<h1>Home Page</h1>
+<h1>Contact List, Ver. 4</h1>
+<hr/>
+<div class="container">
+
+  <div class="row">
+    <div class="card-panel white">
+      <span class="black-text">
+        <div class="row">
+          <div class="col s12">
+            <ul class="tabs">
+              <li class="tab col s3"><a href="#search-form">Filter Results</a></li>
+              <li class="tab col s3"><a href="#new-form">Add New Contact</a></li>
+            </ul>
+          </div>
+          <div id="search-form" class="col s12">
+            <div class="row" style="margin-top: 30px;">
+              <form class="col s12">
+                <div class="row">
+                  <div class="input-field col s8 offset-s2">
+                    <input id="filter-pattern" type="text" class="validate">
+                    <label for="filter-pattern">Search Pattern</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="center">
+                    <a class="waves-effect waves-light btn" id="filter-btn">Apply Filter</a>
+                    <a class="waves-effect waves-light btn" id="show-all-btn">Show All</a>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div id="new-form" class="col s12">
+            <div class="row" style="margin-top: 30px;">
+              <form class="col s12">
+                <div class="row">
+                  <div class="input-field col s6 offset-s3">
+                    <input id="name" type="text" class="validate">
+                    <label for="name">Name</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s6 offset-s3">
+                    <input id="email" type="email" class="validate">
+                    <label for="email">Email</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s6 offset-s3">
+                    <input id="phone" type="text" class="validate">
+                    <label for="phone">Phone</label>
+                  </div>
+                </div>
+                <div class="row center">
+                  <a class="waves-effect waves-light btn" id="save-new-btn">Save</a>
+                </div>
+              </form>
+            </div>
+          </div>
+      </span>
+    </div>
+  </div>
+
+  <div style="margin: 30px auto;">
+    <ul class="collapsible" data-collapsible="expandable" id="contact-list">
+      <% @contacts.each do |contact| %>
+        <li data-id="<%= contact.id %>">
+          <div class="collapsible-header">
+            <i class="large material-icons">contact_phone</i><%= contact.name %>
+            <i class="large material-icons" style="float: right;">delete</i>
+            <i class="large material-icons" style="float: right;">mode_edit</i>
+          </div>
+          <div class="collapsible-body">
+            <p><i class="tiny material-icons">email</i><strong> Email:</strong> <%= contact.email %><br/>
+            <i class="tiny material-icons">phone</i><strong> Phone:</strong> <%= contact.phone %></p>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+</div>
