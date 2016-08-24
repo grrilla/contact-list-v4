@@ -6,12 +6,11 @@ $(document).ready(function(){
     var name = $('#name').val();
     var email = $('#email').val();
     var phone = $('#phone').val();
-    var passData = { name: name, email: email, phone: phone }
     $.ajax({
       url: 'http://localhost:3000/new',
       dataType: 'json',
       method: 'post',
-      data: passData
+      data: { name: name, email: email, phone: phone }
     })
     .done(function(response) {
       updateContacts(response);
@@ -39,12 +38,13 @@ $(document).ready(function(){
     });
   });
 
-  $('#edit-btn').click(function() {
+  $('.collapsible').on('click', '.edit-btn', function() {
 
   });
 
-  $('#delete-btn').click(function() {
-    
+  $('.collapsible').on('click', '.delete-btn', function(e) {
+    e.stopPropagation();
+    $.getJSON('http://localhost:3000/delete/' + $(this).parent().parent().data('id'), updateContacts);
   });
 
 });
@@ -52,11 +52,11 @@ $(document).ready(function(){
 var updateContacts = function(contacts) {
   $('#contact-list').empty();
   contacts.forEach(function(c) {
-    $('#contact-list').append('<li data-id="' + c.id + '%>">'
+    $('#contact-list').append('<li data-id="' + c.id + '">'
         + '<div class="collapsible-header">'
         + '<i class="large material-icons">contact_phone</i>' + c.name
-        + '<i class="large material-icons" style="float: right;">delete</i>'
-        + '<i class="large material-icons" style="float: right;">mode_edit</i>'
+        + '<i class="large material-icons delete-btn" style="float: right;">delete</i>'
+        + '<i class="large material-icons edit-btn" style="float: right;">mode_edit</i>'
         + '</div>'
         + '<div class="collapsible-body">'
         + '<p><i class="tiny material-icons">email</i><strong> Email:</strong> ' + c.email + '<br/>'

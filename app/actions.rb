@@ -6,7 +6,6 @@ helpers do
   end
 end
 
-# show, basically
 get '/' do
   @contacts = get_updated_contact_list
   erb :index
