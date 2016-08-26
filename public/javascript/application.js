@@ -30,16 +30,33 @@ $(document).ready(function(){
     });
   });
 
-  $('#save-edit-btn').click(function() {
+  $('.collapsible-body').on('click', '#save-edit-btn', function() {
     // get form stuff
     // get the id from hidden data attribute
-    $.post('http://localhost:3000/edit', {}, function(response) {
-      // reload contacts on app
-    });
+    let id = $(this).parent().data('id');
+    let email = $('#edit-email').val();
+    let phone = $('#edit-phone').val();
+    $.post('http://localhost:3000/edit', {
+        id: id,
+        email: email,
+        phone: phone
+      },
+      function(response) {
+        updateContacts(response);
+      });
   });
 
   $('.collapsible').on('click', '.edit-btn', function() {
-
+    let contactBody = $($(this).parent().parent().children()[1]);
+    contactBody.empty();
+    contactBody.append(
+      '<form class="col s12"><div class="row"><div class="input-field col s6">'
+      + '<input id="edit-email" type="email" class="validate"><label for="edit-email">Email</label>'
+      + '</div><div class="input-field col s6">'
+      + '<input id="edit-phone" type="text" class="validate"><label for="edit-phone">Phone</label>'
+      + '</div></div><div class="row center"><a class="waves-effect waves-light btn" id="save-edit-btn">'
+      + 'Save Changes</a></div></form>'
+    );
   });
 
   $('.collapsible').on('click', '.delete-btn', function(e) {

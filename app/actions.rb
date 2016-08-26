@@ -27,7 +27,6 @@ end
 
 post '/edit' do
   contact = Contact.find(params[:id])
-  contact.name = params[:name]
   contact.email = params[:email]
   contact.phone = params[:phone]
   contact.save
